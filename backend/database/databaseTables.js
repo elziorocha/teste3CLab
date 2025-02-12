@@ -30,7 +30,7 @@ class Tables {
             data_nascimento DATE NOT NULL,
             sexo ENUM('M', 'F') NOT NULL,
             hobby VARCHAR(40) DEFAULT NULL,
-            nivel_id INTEGER,
+            nivel_id INTEGER DEFAULT NULL,
             FOREIGN KEY (nivel_id) REFERENCES nivel(id)
         );
     `;

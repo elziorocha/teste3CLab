@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const router = Router();
+const nivelController = require('../controllers/nivelController.js')
 
 router.get("/api/nivel", (req, res) => {
   res.send("Chegou um nível cadastrado!");

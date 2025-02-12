@@ -1,22 +1,27 @@
 const { Router } = require("express");
 const router = Router();
+const devController = require("../controllers/devController.js");
 
 router.get("/api/dev", (req, res) => {
-  res.send("Chegou um dev cadastrado!");
+  const resposta = devController.getDev();
+  res.send(resposta);
 });
 
 router.post("/api/dev", (req, res) => {
-  res.send("Dev cadastrado com sucesso!");
+  const resposta = devController.postDev();
+  res.send(resposta);
 });
 
 router.put("/api/dev/:id", (req, res) => {
   const { id } = req.params;
-  res.send(`Dev com o ID: ${id} foi alterado com sucesso!`);
+  const resposta = devController.putDev(id);
+  res.send(resposta);
 });
 
 router.delete("/api/dev/:id", (req, res) => {
   const { id } = req.params;
-  res.send(`Dev com o ID: ${id} foi deletado com sucesso!`);
+  const resposta = devController.deleteDev(id);
+  res.send(resposta);
 });
 
 module.exports = router;
