@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1B2A41;
+  --color-secondary: #324A5F;
+  --color-defaultWhite: #f5f5f5;
+  --color-defaultDark: #0C1821;
+  --color-defaultWhiteText: #f5f5f5;
+}
+
+@layer utilities {
+  .text-shadow-md {
+    text-shadow: -3px 2px 1px black;
+  }
+}
+
+body {
+  @apply bg-defaultWhite;
+}
