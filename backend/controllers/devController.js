@@ -1,6 +1,8 @@
+const devModel = require("../models/devModel.js");
+
 class devController {
   getDev() {
-    return "Buscando Dev na base de dados.";
+    return devModel.getDev();
   }
 
   postDev() {

@@ -1,23 +1,30 @@
 const { Router } = require("express");
 const router = Router();
-const nivelController = require('../controllers/nivelController.js')
+const nivelController = require("../controllers/nivelController.js");
 
 router.get("/api/nivel", (req, res) => {
-  res.send("Chegou um nível cadastrado!");
+  const showNivel = nivelController.getNivel();
+
+  showNivel
+    .then((niveis) => res.status(200).json(niveis))
+    .catch((err) => res.status(404).json(err.message));
 });
 
 router.post("/api/nivel", (req, res) => {
-  res.send("Nível cadastrado com sucesso!");
+  const response = nivelController.postNivel();
+  res.status(200).send(response);
 });
 
 router.put("/api/nivel/:id", (req, res) => {
   const { id } = req.params;
-  res.send(`Nível com o ID: ${id} foi alterado com sucesso!`);
+  const response = nivelController.putNivel();
+  res.status(200).send(response);
 });
 
 router.delete("/api/nivel/:id", (req, res) => {
   const { id } = req.params;
-  res.send(`Nível com o ID: ${id} foi deletado com sucesso!`);
+  const response = nivelController.deleteNivel();
+  res.status(200).send(response);
 });
 
 module.exports = router;

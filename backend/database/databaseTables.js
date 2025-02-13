@@ -27,8 +27,9 @@ class Tables {
         CREATE TABLE IF NOT EXISTS dev (
             id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
             nome VARCHAR(40) NOT NULL,
-            data_nascimento DATE NOT NULL,
             sexo ENUM('M', 'F') NOT NULL,
+            data_nascimento DATE NOT NULL,
+            idade INT(2) NOT NULL,
             hobby VARCHAR(40) DEFAULT NULL,
             nivel_id INTEGER DEFAULT NULL,
             FOREIGN KEY (nivel_id) REFERENCES nivel(id)

@@ -1,6 +1,8 @@
+const nivelModel = require("../models/nivelModel.js");
+
 class nivelController {
   getNivel() {
-    return "Buscando Nível na base de dados.";
+    return nivelModel.getNivel();
   }
 
   postNivel() {
