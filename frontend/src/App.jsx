@@ -1,8 +1,9 @@
-import Home from "./components/home/home";
+import Home from "./app/Home";
+
 
 function App() {
   return (
-    <main className="flex flex-col gap-16 items-center mb-16">
+    <main className="flex flex-col items-center">
       <Home />
     </main>
   );

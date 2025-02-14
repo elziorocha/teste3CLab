@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1B2A41;
-  --color-secondary: #324A5F;
-  --color-defaultWhite: #f5f5f5;
-  --color-defaultDark: #0C1821;
+  --color-primary: #1b2a41;
+  --color-secondary: #324a5f;
+  --color-defaultWhite: #ebebeb;
+  --color-defaultDark: #0c1821;
   --color-defaultWhiteText: #f5f5f5;
 }
 
@@ -12,8 +12,13 @@
   .text-shadow-md {
     text-shadow: -3px 2px 1px black;
   }
+  .box-shadow-box {
+    box-shadow: -6px 5px 1px black;
+  }
 }
 
 body {
   @apply bg-defaultWhite;
+  @apply bg-[url(./assets/background1.svg)] bg-cover;
+  height: 100vh;
 }

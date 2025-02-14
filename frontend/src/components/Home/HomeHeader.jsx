@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin, FaUserCircle } from "react-icons/fa";
 
 const HomeHeader = () => {
   return (
-    <nav className="bg-secondary/75 flex justify-between items-center py-5 px-6">
+    <nav className="bg-secondary flex justify-between items-center py-5 px-6">
       <section className="flex gap-1.5 items-center">
         <img
           src={logo}
@@ -14,6 +14,9 @@ const HomeHeader = () => {
           PampaDevs
         </h1>
       </section>
+
+      <h2 className="text-3xl font-bold text-defaultWhiteText italic">Teste 3C Lab</h2>
+
       <section className="flex gap-6">
         <FaGithub
           className="size-12 bg-defaultWhite rounded-full p-1 cursor-pointer
