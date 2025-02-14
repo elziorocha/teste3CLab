@@ -39,6 +39,38 @@ class nivelModel {
       });
     });
   }
+
+  putNivel(updateNivel, id) {
+    const sql = "UPDATE nivel SET ? WHERE id = ?";
+
+    return new Promise((resolve, reject) => {
+      connection.query(sql, [updateNivel, id], (err, response) => {
+        if (err) {
+          console.log("Erro na modificação de um Nível.");
+          reject(err);
+        }
+
+        console.log("Nível modificado com sucesso!");
+        resolve(response);
+      });
+    });
+  }
+
+  deleteNivel(id) {
+    const sql = "DELETE FROM nivel WHERE id = ?";
+
+    return new Promise((resolve, reject) => {
+      connection.query(sql, id, (err, response) => {
+        if (err) {
+          console.log("Erro ao deletar um Nível.");
+          reject(err);
+        }
+
+        console.log("Nível deletado com sucesso!");
+        resolve(response);
+      });
+    });
+  }
 }
 
 module.exports = new nivelModel();

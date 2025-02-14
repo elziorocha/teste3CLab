@@ -31,8 +31,8 @@ class Tables {
             data_nascimento DATE NOT NULL,
             idade INT(2) NOT NULL,
             hobby VARCHAR(40) DEFAULT NULL,
-            nivel INTEGER DEFAULT NULL,
-            FOREIGN KEY (nivel) REFERENCES nivel(id)
+            nivel_id INTEGER DEFAULT NULL,
+            FOREIGN KEY (nivel_id) REFERENCES nivel(id)
         );
     `;
 

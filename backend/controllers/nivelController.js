@@ -9,12 +9,12 @@ class nivelController {
     return nivelModel.postNivel(newNivel);
   }
 
-  putNivel(id) {
-    return "Nível de id" + id + "alterado na base de dados";
+  putNivel(updateNivel, id) {
+    return nivelModel.putNivel(updateNivel, id);
   }
 
   deleteNivel(id) {
-    return "Nível de id" + id + "deletado na base de dados";
+    return nivelModel.deleteNivel(id);
   }
 }
 

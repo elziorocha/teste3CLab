@@ -4,11 +4,9 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 const indexRoutes = require("./routers/index");
-indexRoutes(app);
+indexRoutes(app, express);
 
 const connection = require("./database/connection.js");
 const tables = require("./database/databaseTables.js");

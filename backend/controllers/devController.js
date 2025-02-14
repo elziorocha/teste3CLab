@@ -9,12 +9,12 @@ class devController {
     return devModel.postDev(newDev);
   }
 
-  putDev(id) {
-    return "Dev de id" + id + "alterado na base de dados";
+  putDev(updateDev, id) {
+    return devModel.putDev(updateDev, id);
   }
 
   deleteDev(id) {
-    return "Dev de id" + id + "deletado na base de dados";
+    return devModel.deleteDev(id);
   }
 }
 

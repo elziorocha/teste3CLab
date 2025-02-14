@@ -21,14 +21,21 @@ router.post("/api/nivel", (req, res) => {
 
 router.put("/api/nivel/:id", (req, res) => {
   const { id } = req.params;
-  const response = nivelController.putNivel();
-  res.status(200).send(response);
+  const updateNivel = req.body;
+  const alterNivel = nivelController.putNivel(updateNivel, id);
+
+  alterNivel
+    .then((nivelUpdated) => res.status(201).json(nivelUpdated))
+    .catch((err) => res.status(400).json(err.message));
 });
 
 router.delete("/api/nivel/:id", (req, res) => {
   const { id } = req.params;
-  const response = nivelController.deleteNivel();
-  res.status(200).send(response);
+  const removeNivel = nivelController.deleteNivel(id);
+
+  removeNivel
+    .then((nivelRemoved) => res.status(200).json(nivelRemoved))
+    .catch((err) => res.status(400).json(err.message));
 });
 
 module.exports = router;
