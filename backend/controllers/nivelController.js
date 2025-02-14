@@ -1,20 +1,40 @@
 const nivelModel = require("../models/nivelModel.js");
 
 class nivelController {
-  getNivel() {
-    return nivelModel.getNivel();
+  async getNivel(req, res) {
+    const showNivel = nivelModel.getNivel();
+
+    showNivel
+      .then((niveis) => res.status(200).json(niveis))
+      .catch((err) => res.status(404).json(err.message));
   }
 
-  postNivel(newNivel) {
-    return nivelModel.postNivel(newNivel);
+  async postNivel(req, res) {
+    const newNivel = req.body;
+    const insertNivel = nivelModel.postNivel(newNivel);
+
+    insertNivel
+      .then((nivelCreated) => res.status(201).json(nivelCreated))
+      .catch((err) => res.status(404).json(err.message));
   }
 
-  putNivel(updateNivel, id) {
-    return nivelModel.putNivel(updateNivel, id);
+  async putNivel(req, res) {
+    const { id } = req.params;
+    const updateNivel = req.body;
+    const alterNivel = nivelModel.putNivel(updateNivel, id);
+
+    alterNivel
+      .then((nivelUpdated) => res.status(201).json(nivelUpdated))
+      .catch((err) => res.status(400).json(err.message));
   }
 
-  deleteNivel(id) {
-    return nivelModel.deleteNivel(id);
+  async deleteNivel(req, res) {
+    const { id } = req.params;
+    const removeNivel = nivelModel.deleteNivel(id);
+
+    removeNivel
+      .then((nivelRemoved) => res.status(200).json(nivelRemoved))
+      .catch((err) => res.status(400).json(err.message));
   }
 }
 
