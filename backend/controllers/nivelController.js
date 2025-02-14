@@ -5,8 +5,8 @@ class nivelController {
     return nivelModel.getNivel();
   }
 
-  postNivel() {
-    return "Nível criado na base de dados";
+  postNivel(newNivel) {
+    return nivelModel.postNivel(newNivel);
   }
 
   putNivel(id) {

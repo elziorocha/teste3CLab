@@ -11,19 +11,25 @@ router.get("/api/dev", (req, res) => {
 });
 
 router.post("/api/dev", (req, res) => {
-  const response = devController.postDev();
-  res.status(200).send(response);
+  const newDev = req.body;
+  const insertDev = devController.postDev(newDev);
+
+  insertDev
+    .then((devCreated) => res.status(201).json(devCreated))
+    .catch((err) => res.status(404).json(err.message));
 });
 
 router.put("/api/dev/:id", (req, res) => {
   const { id } = req.params;
   const response = devController.putDev(id);
+
   res.status(200).send(response);
 });
 
 router.delete("/api/dev/:id", (req, res) => {
   const { id } = req.params;
   const response = devController.deleteDev(id);
+
   res.status(200).send(response);
 });
 

@@ -5,8 +5,8 @@ class devController {
     return devModel.getDev();
   }
 
-  postDev() {
-    return "Dev criado na base de dados";
+  postDev(newDev) {
+    return devModel.postDev(newDev);
   }
 
   putDev(id) {

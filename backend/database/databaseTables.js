@@ -9,7 +9,7 @@ class Tables {
     const sql = `
         CREATE TABLE IF NOT EXISTS nivel (
             id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            nome VARCHAR(20) NOT NULL
+            nome VARCHAR(20) NOT NULL UNIQUE
         );
     `;
 
@@ -31,8 +31,8 @@ class Tables {
             data_nascimento DATE NOT NULL,
             idade INT(2) NOT NULL,
             hobby VARCHAR(40) DEFAULT NULL,
-            nivel_id INTEGER DEFAULT NULL,
-            FOREIGN KEY (nivel_id) REFERENCES nivel(id)
+            nivel INTEGER DEFAULT NULL,
+            FOREIGN KEY (nivel) REFERENCES nivel(id)
         );
     `;
 

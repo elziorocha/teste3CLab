@@ -11,8 +11,12 @@ router.get("/api/nivel", (req, res) => {
 });
 
 router.post("/api/nivel", (req, res) => {
-  const response = nivelController.postNivel();
-  res.status(200).send(response);
+  const newNivel = req.body;
+  const insertNivel = nivelController.postNivel(newNivel);
+
+  insertNivel
+    .then((nivelCreated) => res.status(201).json(nivelCreated))
+    .catch((err) => res.status(404).json(err.message));
 });
 
 router.put("/api/nivel/:id", (req, res) => {
