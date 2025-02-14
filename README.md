@@ -12,6 +12,16 @@
     - No campo local, será criada o database "teste3c", as tabelas, são criadas automaticamente ao inicializar o projeto no backend.
 
 - 📂**backend**:
-    - Utilizar o comando "npm i", ao entrar na pasta backend, e logo após instalar as dependências necessárias, executar o comando "npm run dev", para inicializar o nodemon.
+    - Utilizar o comando "npm i", ao entrar na pasta backend, e logo após instalar as dependências necessárias, executar o comando "npm run dev", para inicializar o nodemon (http://localhost:3000/).
+
 - 📂**frontend**: 
-    - Utilizar o comando "npm i", ao entrar na pasta frontend, e logo após instalar as dependências necessárias, executar o comando "npm run dev", para inicializar o serviço.
+    - Utilizar o comando "npm i", ao entrar na pasta frontend, e logo após instalar as dependências necessárias, executar o comando "npm run dev", para inicializar o serviço ("http://localhost:5173/").
+
+<hr align="center"/>
+
+### **API RESTful:**
+    -   A Api foi desenvolvida em NodeJS, com a estrutura de Rotas, Controllers e Models.
+- 📂**database**:
+    -   Dentro da pasta "database", na pasta de backend, estão dois arquivos para conexão e criação da modelagem do banco de dados do projeto.
+    -   O arquivo "connection.js", serve para estabelecer a conexão com o database (na utilização deste projeto, o local com o xampp).
+    -   O arquivo "databaseTables.js", foi de utilização para a criação das tabelas no banco de dados, assim que conectado, contendo parâmetros de criar apenas se o banco ainda não existe localmente.

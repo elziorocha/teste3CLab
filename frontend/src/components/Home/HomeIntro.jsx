@@ -1,7 +1,7 @@
 const HomeIntro = () => {
   return (
     <section className="flex items-center justify-center px-20">
-      <div className="flex flex-col gap-6 p-4 bg-secondary rounded-t-2xl box-shadow-box">
+      <div className="flex flex-col gap-6 p-4 bg-primary rounded-t-2xl box-shadow-box">
         <div className="text-4xl flex gap-2.5">
           <h1 className="text-gray-300 font-semibold">
             Seja Bem-vindo(a) ao sistema de cadastro de desenvolvedores

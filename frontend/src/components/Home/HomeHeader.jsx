@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin, FaUserCircle } from "react-icons/fa";
 
 const HomeHeader = () => {
   return (
-    <nav className="bg-secondary flex justify-between items-center py-5 px-6">
+    <nav className="bg-primary flex justify-between items-center py-5 px-6">
       <section className="flex gap-1.5 items-center">
         <img
           src={logo}
