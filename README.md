@@ -9,7 +9,8 @@
 
 - 📂**Banco de Dados**:
 
-  - Será necessário utilizar xampp (ou software similiar) para rodar o banco de dados localmente na porta 3306 (user: root, sem senha).
+  - Será necessário utilizar xampp (ou software similiar) para rodar o banco de dados localmente na porta 3306, inicalizando o APACHE e o MySQL
+  (user: root, sem senha).
   - No campo local, será criada o database "teste3c", as tabelas, são criadas automaticamente ao inicializar o projeto no backend.
 
 - 📂**backend**:

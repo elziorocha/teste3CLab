@@ -1,5 +1,5 @@
 import logo from "../../assets/logo.png";
-import { FaGithub, FaLinkedin, FaUserCircle } from "react-icons/fa";
+import HomeLinks from "./HomeLinks";
 
 const HomeHeader = () => {
   return (
@@ -15,22 +15,11 @@ const HomeHeader = () => {
         </h1>
       </section>
 
-      <h2 className="text-3xl font-bold text-defaultWhiteText italic">Teste 3C Lab</h2>
+      <h2 className="text-3xl font-bold text-defaultWhiteText italic">
+        Teste 3C Lab
+      </h2>
 
-      <section className="flex gap-6">
-        <FaGithub
-          className="size-12 bg-defaultWhite rounded-full p-1 cursor-pointer
-        hover:bg-defaultDark hover:text-defaultWhiteText transition-all duration-300"
-        />
-        <FaUserCircle
-          className="size-12 bg-defaultWhite rounded-full p-1 cursor-pointer
-        hover:bg-defaultDark hover:text-defaultWhiteText transition-all duration-300"
-        />
-        <FaLinkedin
-          className="size-12 bg-defaultWhite rounded-md p-0.5 cursor-pointer
-        hover:bg-defaultDark hover:text-defaultWhiteText transition-all duration-300"
-        />
-      </section>
+      <HomeLinks />
     </nav>
   );
 };

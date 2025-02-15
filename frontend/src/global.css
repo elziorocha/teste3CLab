@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -15,10 +16,14 @@
   .box-shadow-box {
     box-shadow: -6px 5px 1px black;
   }
+  .option-button {
+    @apply px-5 py-2 w-30 text-center bg-primary rounded-2xl hover:rounded-lg transition-all;
+  }
 }
 
 body {
   @apply bg-defaultWhite;
   @apply bg-[url(./assets/background1.svg)] bg-cover;
   height: 100vh;
+  font-family: "Exo 2", serif;
 }
