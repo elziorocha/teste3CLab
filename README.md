@@ -10,7 +10,7 @@
 - 📂**Banco de Dados**:
 
   - Será necessário utilizar xampp (ou software similiar) para rodar o banco de dados localmente na porta 3306, inicalizando o APACHE e o MySQL
-  (user: root, sem senha).
+    (user: root, sem senha).
   - No campo local, será criada o database "teste3c", as tabelas, são criadas automaticamente ao inicializar o projeto no backend.
 
 - 📂**backend**:
@@ -22,7 +22,7 @@
 
 <hr align="center"/>
 
-### **API RESTful:**
+### **API RESTful/Backend:**
 
     -   A Api foi desenvolvida em NodeJS, com a estrutura de Rotas, Controllers e Models.
 
@@ -56,4 +56,27 @@
     - "http://localhost:3000/api/nivel/:id" para put e delete
 
 - **testes**:
-  - Para executar testes das chamadas da API, foi utilizado a extensão do ThunderCliente (extensão disponibilzada no VSCode), onde foi criado uma pasta para o projeto, e subdividido em pastas de get, post, put e delete para dev e nível;
+  - Para executar testes das chamadas da API, foi utilizado a extensão do ThunderClient (extensão disponibilzada no VSCode), onde foi criado uma pasta para o projeto, e subdividido em pastas de get, post, put e delete para dev e nível;
+
+### **Frontend**
+
+    -   O frontend foi realizado utilizando React como framework com Vite para melhor versionamento;
+    -   Como padrão de estilização, foi utilizado o tailwindCSS, para remoção de arquivos CSS e melhor organização de arquivos em pastas no projeto;
+    (Se a estilização não estiver em total funcionamento, o tailwind pode não ter carregado localmente, onde é necessário reiniciar a página (apenas localmente))
+
+- 📂**componentização**:
+
+  - A pasta principal, dentro de frontend, é a pasta "src", onde estão os arquivos que inicializam o frontend.
+  - A separação em pastas, foi feita com base nas necessidades de monitorar os elementos de "Dev" e "Nível", utilizando paginação diferente para melhor estruturação do frontend.
+
+- 📂**CRUD**:
+
+  - O CRUD, foi dividido em duas partes: adição e visualização.
+
+    - Adição: encontrado nos arquivos "DevForm.jsx" e "NivelForm.jsx", são as páginas de adição de dados, onde são efetuadas as chamadas da api de POST;
+
+    - Visualização: encontrado nos arquivos de "DevList.jsx" e "NivelList.jsx", são as páginas de visualização dos dados da api GET, juntamente com o PUT e DELETE, para alteração e remoção dos dados, respectivamente;
+
+  - Foi utilizado a dependência "axios", para a chamada da rota de API fornecida pelo backend, utilizando hooks do react para versionamento das funcionalidades.
+
+  - A utilização de confirmação de uso, foi idealizado o uso de Toasts do "react-toastify", onde há confirmação de entrada de dados (payloads), ao inserir as informações nos forms.
