@@ -3,6 +3,7 @@ import Error from "../app/Error.jsx";
 import Home from "../app/Home.jsx";
 import Dev from "../app/Dev.jsx";
 import Nivel from "../app/Nivel.jsx";
+import NivelForm from "../components/NivelPage/NivelForm.jsx";
 
 const Router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const Router = createBrowserRouter([
   {
     path: "/nivel",
     element: <Nivel />,
+  },
+  {
+    path: "/nivel/cadastro",
+    element: <NivelForm />,
   },
 ]);
 
