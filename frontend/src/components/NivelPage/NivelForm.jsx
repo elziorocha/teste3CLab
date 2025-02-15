@@ -46,18 +46,19 @@ const NivelForm = ({ getNiveis }) => {
       <div className="flex w-full justify-start p-4">
         <Link
           to="/nivel"
-          className="bg-blue-500 text-2xl px-4 py-2 cursor-pointer text-defaultWhite rounded-md hover:bg-blue-600 transition-all"
+          className="button-default bg-secondary hover:bg-primary text-2xl"
         >
           Voltar
         </Link>
       </div>
-      <div className="flex flex-col gap-7">
+      <div className="flex flex-col gap-7 mb-20">
         <h2 className="text-4xl font-semibold">Cadastre um Nível!</h2>
         <form ref={ref} onSubmit={handleSubmit} className="flex flex-col gap-2">
           <span className="text-lg">Nome do Nível</span>
 
           <div className="flex gap-2 items-center justify-center">
             <input
+            placeholder="Ex: trainee"
               name="nomeNivel"
               type="text"
               className="bg-zinc-300 outline-none px-4 py-2 rounded-md"
@@ -65,7 +66,7 @@ const NivelForm = ({ getNiveis }) => {
 
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 transition-all p-2 w-20 self-center cursor-pointer text-defaultWhite rounded-md"
+              className="button-default bg-secondary hover:bg-primary"
             >
               Salvar
             </button>
