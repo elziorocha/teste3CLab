@@ -30,7 +30,7 @@
     @apply px-4 py-2 cursor-pointer text-defaultWhite rounded-md transition-all;
   }
   .dev-info {
-    @apply px-4 py-1.5 bg-gray-400 rounded-lg shadow-md
+    @apply px-4 py-1.5 bg-gray-400 rounded-lg shadow-md;
   }
 }
 
@@ -69,4 +69,8 @@ body {
 
 *::-webkit-scrollbar-thumb:active {
   background-color: #676767;
+}
+
+select {
+  @apply bg-transparent; 
 }

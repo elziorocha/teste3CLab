@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
-import { FaTrash } from "react-icons/fa";
-import Modal from "../modals/Modal";
+import DetailModal from "../modals/DetailModal";
+import EditModal from "../modals/EditModal";
+import DeleteModal from "../modals/deleteModal";
 
 const DevList = () => {
   const [devs, setDevs] = useState([]);
@@ -39,13 +40,14 @@ const DevList = () => {
 
   const handleEditClick = (dev) => {
     setSelectedDev(dev);
+    console.log("Dev selecionado:", dev);
     setEditedDev({
       nome: dev.nome,
       sexo: dev.sexo,
       idade: dev.idade,
       data_nascimento: dev.data_nascimento,
       hobby: dev.hobby,
-      nivel_id: dev.nivel_id,
+      nivel_id: dev.nivel.id,
     });
     setOpenEdit(true);
   };
@@ -56,22 +58,24 @@ const DevList = () => {
   };
 
   const handleEditSubmit = async () => {
-    if (/[\d]/.test(selectedDev.nome)) {
+    console.log("Dados do formulário:", editedDev);
+
+    if (/[\d]/.test(editedDev.nome)) {
       toast.error('O campo "nome" não pode conter números.');
       return;
-    } else if (selectedDev.sexo !== "F" && selectedDev.sexo !== "M") {
+    } else if (editedDev.sexo !== "F" && editedDev.sexo !== "M") {
       toast.error('O campo "sexo" deve conter apenas M ou F');
       return;
-    } else if (!/^\d+$/.test(selectedDev.idade)) {
+    } else if (!/^\d+$/.test(editedDev.idade)) {
       toast.error('O campo "idade" deve conter apenas números');
       return;
     } else if (
-      !selectedDev.nome ||
-      !selectedDev.sexo ||
-      !selectedDev.idade ||
-      !selectedDev.data_nascimento ||
-      !selectedDev.hobby ||
-      !selectedDev.nivel_id
+      !editedDev.nome ||
+      !editedDev.sexo ||
+      !editedDev.idade ||
+      !editedDev.data_nascimento ||
+      !editedDev.hobby ||
+      !editedDev.nivel_id
     ) {
       toast.error("Nenhum campo pode estar em branco!");
       return;
@@ -88,8 +92,8 @@ const DevList = () => {
             dev.id === selectedDev.id ? { ...dev, ...editedDev } : dev
           )
         );
-        setOpenEdit(false);
         toast.success("Desenvolvedor atualizado com sucesso!");
+        setOpenEdit(false);
       }
     } catch (err) {
       console.error("Erro ao editar o dev:", err);
@@ -139,162 +143,6 @@ const DevList = () => {
                   >
                     Excluir
                   </button>
-
-                  <Modal open={openDetail} onClose={() => setOpenDetail(false)}>
-                    <section className="flex flex-col items-center gap-6 bg-zinc-300 px-7 py-4 rounded-lg w-3/6">
-                      {selectedDev && (
-                        <div className="flex flex-col gap-8 items-center justify-center">
-                          <h3 className="font-bold text-2xl">
-                            Detalhes do Dev: {selectedDev.nome}
-                          </h3>
-
-                          <div className="flex gap-4">
-                            <p className="dev-info">ID: {selectedDev.id}</p>
-                            <p className="dev-info">Nome: {selectedDev.nome}</p>
-                            <p className="dev-info">Sexo: {selectedDev.sexo}</p>
-                          </div>
-
-                          <div className="flex gap-4">
-                            <p className="dev-info">
-                              Idade: {selectedDev.idade}
-                            </p>
-                            <p className="dev-info">
-                              Data de Nascimento:
-                              {
-                                new Date(selectedDev.data_nascimento)
-                                  .toISOString()
-                                  .split("T")[0]
-                              }
-                            </p>
-                            <p className="dev-info">
-                              Hobby: {selectedDev.hobby}
-                            </p>
-                          </div>
-
-                          <p className="dev-info">
-                            Nível: {selectedDev.nivel.nome}
-                          </p>
-
-                          <button
-                            className="button-default bg-secondary hover:bg-primary self-end mt-16"
-                            onClick={() => setOpenDetail(false)}
-                          >
-                            Fechar
-                          </button>
-                        </div>
-                      )}
-                    </section>
-                  </Modal>
-
-                  <Modal open={openEdit} onClose={() => setOpenEdit(false)}>
-                    <section className="flex flex-col items-center gap-6 bg-zinc-300 px-7 py-4 rounded-lg w-3/6">
-                      <h3 className="font-bold text-2xl">
-                        Editar Dev: {selectedDev?.nome}
-                      </h3>
-
-                      <div className="flex flex-col gap-4">
-                        <label value="nome" className="dev-info flex gap-2">
-                          Nome:
-                          <input
-                            type="text"
-                            id="nome"
-                            value={editedDev.nome}
-                            onChange={handleEditChange}
-                            className="outline-none"
-                          />
-                        </label>
-
-                        <label value="sexo" className="dev-info flex gap-2">
-                          Sexo:
-                          <input
-                            type="text"
-                            id="sexo"
-                            value={editedDev.sexo}
-                            onChange={handleEditChange}
-                            className="outline-none"
-                          />
-                        </label>
-
-                        <label value="idade" className="dev-info flex gap-2">
-                          Idade:
-                          <input
-                            type="text"
-                            id="idade"
-                            value={editedDev.idade}
-                            onChange={handleEditChange}
-                            className="outline-none"
-                          />
-                        </label>
-
-                        <label
-                          value="data_nascimento"
-                          className="dev-info flex gap-2"
-                        >
-                          Data de Nascimento:
-                          <input
-                            type="date"
-                            id="data_nascimento"
-                            value={editedDev.data_nascimento}
-                            onChange={handleEditChange}
-                            className="outline-none"
-                          />
-                        </label>
-
-                        <label value="hobby" className="dev-info flex gap-2">
-                          Hobby:
-                          <input
-                            type="text"
-                            id="hobby"
-                            value={editedDev.hobby}
-                            onChange={handleEditChange}
-                            className="outline-none"
-                          />
-                        </label>
-
-                        <div className="flex flex-col gap-1">
-                          <button
-                            onClick={() => {
-                              handleEditSubmit();
-                              setOpenEdit(false);
-                            }}
-                            className="button-default bg-secondary hover:bg-primary mt-4"
-                          >
-                            Salvar Alterações
-                          </button>
-
-                          <button
-                            onClick={() => setOpenEdit(false)}
-                            className="button-default bg-secondary hover:bg-primary mt-2"
-                          >
-                            Fechar
-                          </button>
-                        </div>
-                      </div>
-                    </section>
-                  </Modal>
-
-                  <Modal open={openDelete} onClose={() => setOpenDelete(false)}>
-                    <section className="flex flex-col items-center gap-6 bg-zinc-300 px-7 py-4 rounded-lg">
-                      <div className="flex gap-4 items-center">
-                        <h3 className="font-bold text-xl">Você tem certeza?</h3>
-                        <FaTrash className="text-red-600 size-8" />
-                      </div>
-                      <div className="flex gap-4">
-                        <button
-                          onClick={() => handleDelete(dev.id)}
-                          className="button-default bg-red-700 hover:bg-red-800"
-                        >
-                          Sim
-                        </button>
-                        <button
-                          onClick={() => setOpenDelete(false)}
-                          className="button-default bg-secondary hover:bg-primary"
-                        >
-                          Não
-                        </button>
-                      </div>
-                    </section>
-                  </Modal>
                 </div>
               </section>
               <hr className="w-full border-t-2 mb-3 border-zinc-400 self-center" />
@@ -304,6 +152,28 @@ const DevList = () => {
           <span>Não há devs cadastrados no sistema.</span>
         )}
       </div>
+
+      <DetailModal
+        open={openDetail}
+        onClose={() => setOpenDetail(false)}
+        selectedDev={selectedDev}
+      />
+
+      <EditModal
+        open={openEdit}
+        onClose={() => setOpenEdit(false)}
+        selectedDev={selectedDev}
+        editedDev={editedDev}
+        handleEditChange={handleEditChange}
+        handleEditSubmit={handleEditSubmit}
+      />
+
+      <DeleteModal
+        open={openDelete}
+        onClose={() => setOpenDelete(false)}
+        handleDelete={handleDelete}
+        devId={selectedDev?.id}
+      />
 
       <ToastContainer />
     </section>
