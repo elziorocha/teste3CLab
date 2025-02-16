@@ -17,6 +17,7 @@ const DevForm = ({ getDevs }) => {
     const idadeDev = form.idadeDev.value.trim();
     const dataDev = form.dataDev.value.trim();
     const hobbyDev = form.hobbyDev.value.trim();
+    const nivelDev = form.nivelDev.value;
 
     if (/[\d]/.test(nomeDev)) {
       toast.error(`O campo "nome" não pode conter números.`);
@@ -27,7 +28,14 @@ const DevForm = ({ getDevs }) => {
     } else if (!/^\d+$/.test(idadeDev)) {
       toast.error(`O campo "idade" deve conter apenas números`);
       return;
-    } else if (!nomeDev || !sexoDev || !idadeDev || !dataDev || !hobbyDev) {
+    } else if (
+      !nomeDev ||
+      !sexoDev ||
+      !idadeDev ||
+      !dataDev ||
+      !hobbyDev ||
+      !nivelDev
+    ) {
       toast.error("Nenhum campo pode estar em branco!");
       return;
     }
@@ -38,6 +46,7 @@ const DevForm = ({ getDevs }) => {
       idade: idadeDev,
       data_nascimento: dataDev,
       hobby: hobbyDev,
+      nivel_id: nivelDev,
     };
 
     try {

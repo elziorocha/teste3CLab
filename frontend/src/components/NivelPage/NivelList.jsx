@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-import DeleteModal from "../modals/deleteModal";
 import { FaTrash } from "react-icons/fa";
+import Modal from "../modals/Modal";
 
 const NivelList = () => {
   const [niveis, setNiveis] = useState([]);
   const [editId, setEditId] = useState(null);
   const [newNome, setNewNome] = useState("");
-  const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
 
   useEffect(() => {
     fetchNiveis();
@@ -73,8 +73,9 @@ const NivelList = () => {
           niveis.map((nivel) => (
             <span key={nivel.id} className="flex flex-col gap-3 px-2 py-0.5">
               <section className="flex justify-between items-center gap-20 px-3">
-                <div className="flex justify-between items-center gap-2 text-xl">
-                  <h3>{nivel.id}</h3>
+                <div className="flex justify-between items-center gap-10 text-xl">
+                  <h3>ID: {nivel.id}</h3>
+
                   {editId === nivel.id ? (
                     <input
                       type="text"
@@ -103,12 +104,12 @@ const NivelList = () => {
                     </button>
                   )}
                   <button
-                    onClick={() => setOpen(true)}
+                    onClick={() => setOpenDelete(true)}
                     className="button-default bg-red-700 hover:bg-red-800"
                   >
                     Excluir
                   </button>
-                  <DeleteModal open={open} onClose={() => setOpen(false)}>
+                  <Modal open={openDelete} onClose={() => setOpenDelete(false)}>
                     <section className="flex flex-col items-center gap-6 bg-zinc-300 px-7 py-4 rounded-lg">
                       <div className="flex gap-4 items-center">
                         <h3 className="font-bold text-xl">Você tem certeza?</h3>
@@ -122,14 +123,14 @@ const NivelList = () => {
                           Sim
                         </button>
                         <button
-                          onClick={() => setOpen(false)}
+                          onClick={() => setOpenDelete(false)}
                           className="button-default bg-secondary hover:bg-primary"
                         >
                           Não
                         </button>
                       </div>
                     </section>
-                  </DeleteModal>
+                  </Modal>
                 </div>
               </section>
               <hr className="w-full border-t-2 mb-3 border-zinc-400 self-center" />
