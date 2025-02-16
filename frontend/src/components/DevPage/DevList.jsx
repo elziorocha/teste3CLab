@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
 import Modal from "../modals/Modal";
@@ -50,18 +50,50 @@ const DevList = () => {
     setOpenEdit(true);
   };
 
+  const handleEditChange = (e) => {
+    const { id, value } = e.target;
+    setEditedDev((prev) => ({ ...prev, [id]: value }));
+  };
+
   const handleEditSubmit = async () => {
+    if (/[\d]/.test(selectedDev.nome)) {
+      toast.error('O campo "nome" não pode conter números.');
+      return;
+    } else if (selectedDev.sexo !== "F" && selectedDev.sexo !== "M") {
+      toast.error('O campo "sexo" deve conter apenas M ou F');
+      return;
+    } else if (!/^\d+$/.test(selectedDev.idade)) {
+      toast.error('O campo "idade" deve conter apenas números');
+      return;
+    } else if (
+      !selectedDev.nome ||
+      !selectedDev.sexo ||
+      !selectedDev.idade ||
+      !selectedDev.data_nascimento ||
+      !selectedDev.hobby ||
+      !selectedDev.nivel_id
+    ) {
+      toast.error("Nenhum campo pode estar em branco!");
+      return;
+    }
+
     try {
       const response = await axios.put(
         `http://localhost:3000/api/dev/${selectedDev.id}`,
         editedDev
       );
       if (response.status === 200) {
-        fetchDevs();
+        setDevs((prevDevs) =>
+          prevDevs.map((dev) =>
+            dev.id === selectedDev.id ? { ...dev, ...editedDev } : dev
+          )
+        );
         setOpenEdit(false);
+        toast.success("Desenvolvedor atualizado com sucesso!");
       }
     } catch (err) {
       console.error("Erro ao editar o dev:", err);
+      toast.error("Erro ao atualizar o desenvolvedor.");
     }
   };
 
@@ -69,8 +101,10 @@ const DevList = () => {
     try {
       await axios.delete(`http://localhost:3000/api/dev/${id}`);
       setDevs(devs.filter((dev) => dev.id !== id));
+      toast.success("Desenvolvedor excluído com sucesso!");
     } catch (err) {
       console.error("Erro ao excluir o dev:", err);
+      toast.error("Erro ao excluir o desenvolvedor.");
     }
   };
 
@@ -165,12 +199,7 @@ const DevList = () => {
                             type="text"
                             id="nome"
                             value={editedDev.nome}
-                            onChange={(e) =>
-                              setEditedDev({
-                                ...editedDev,
-                                nome: e.target.value,
-                              })
-                            }
+                            onChange={handleEditChange}
                             className="outline-none"
                           />
                         </label>
@@ -181,12 +210,7 @@ const DevList = () => {
                             type="text"
                             id="sexo"
                             value={editedDev.sexo}
-                            onChange={(e) =>
-                              setEditedDev({
-                                ...editedDev,
-                                sexo: e.target.value,
-                              })
-                            }
+                            onChange={handleEditChange}
                             className="outline-none"
                           />
                         </label>
@@ -197,12 +221,7 @@ const DevList = () => {
                             type="text"
                             id="idade"
                             value={editedDev.idade}
-                            onChange={(e) =>
-                              setEditedDev({
-                                ...editedDev,
-                                idade: e.target.value,
-                              })
-                            }
+                            onChange={handleEditChange}
                             className="outline-none"
                           />
                         </label>
@@ -216,12 +235,7 @@ const DevList = () => {
                             type="date"
                             id="data_nascimento"
                             value={editedDev.data_nascimento}
-                            onChange={(e) =>
-                              setEditedDev({
-                                ...editedDev,
-                                data_nascimento: e.target.value,
-                              })
-                            }
+                            onChange={handleEditChange}
                             className="outline-none"
                           />
                         </label>
@@ -232,12 +246,7 @@ const DevList = () => {
                             type="text"
                             id="hobby"
                             value={editedDev.hobby}
-                            onChange={(e) =>
-                              setEditedDev({
-                                ...editedDev,
-                                hobby: e.target.value,
-                              })
-                            }
+                            onChange={handleEditChange}
                             className="outline-none"
                           />
                         </label>
