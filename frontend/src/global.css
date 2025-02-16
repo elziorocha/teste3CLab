@@ -19,6 +19,10 @@
   .box-shadow-form {
     box-shadow: 0 0 7px 0 black;
   }
+  .icon-links {
+    @apply size-12 bg-defaultWhite cursor-pointer
+    hover:bg-defaultDark hover:text-defaultWhiteText transition-all duration-300;
+  }
   .option-button {
     @apply px-5 py-2 w-30 text-center bg-primary rounded-2xl hover:rounded-lg transition-all;
   }

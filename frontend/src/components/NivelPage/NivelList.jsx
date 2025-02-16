@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import DeleteModal from "../modals/deleteModal";
+import { FaTrash } from "react-icons/fa";
 
 const NivelList = () => {
   const [niveis, setNiveis] = useState([]);
   const [editId, setEditId] = useState(null);
   const [newNome, setNewNome] = useState("");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     fetchNiveis();
@@ -100,11 +103,33 @@ const NivelList = () => {
                     </button>
                   )}
                   <button
-                    onClick={() => handleDelete(nivel.id)}
+                    onClick={() => setOpen(true)}
                     className="button-default bg-red-700 hover:bg-red-800"
                   >
                     Excluir
                   </button>
+                  <DeleteModal open={open} onClose={() => setOpen(false)}>
+                    <section className="flex flex-col items-center gap-6 bg-zinc-300 px-7 py-4 rounded-lg">
+                      <div className="flex gap-4 items-center">
+                        <h3 className="font-bold text-xl">Você tem certeza?</h3>
+                        <FaTrash className="text-red-600 size-8" />
+                      </div>
+                      <div className="flex gap-4">
+                        <button
+                          onClick={() => handleDelete(nivel.id)}
+                          className="button-default bg-red-700 hover:bg-red-800"
+                        >
+                          Sim
+                        </button>
+                        <button
+                          onClick={() => setOpen(false)}
+                          className="button-default bg-secondary hover:bg-primary"
+                        >
+                          Não
+                        </button>
+                      </div>
+                    </section>
+                  </DeleteModal>
                 </div>
               </section>
               <hr className="w-full border-t-2 mb-3 border-zinc-400 self-center" />
