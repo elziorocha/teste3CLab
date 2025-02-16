@@ -9,6 +9,7 @@ const NivelList = () => {
   const [editId, setEditId] = useState(null);
   const [newNome, setNewNome] = useState("");
   const [openDelete, setOpenDelete] = useState(false);
+  const [devsCount, setDevsCount] = useState({});
 
   useEffect(() => {
     fetchNiveis();
@@ -18,8 +19,21 @@ const NivelList = () => {
     try {
       const response = await axios.get("http://localhost:3000/api/nivel");
       setNiveis(response.data);
+
+      response.data.forEach((nivel) => fetchDevsCount(nivel.id));
     } catch (err) {
       console.error("Erro ao buscar os níveis:", err);
+    }
+  };
+
+  const fetchDevsCount = async (nivelId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/dev?nivelId=${nivelId}`
+      );
+      setDevsCount((prev) => ({ ...prev, [nivelId]: response.data.length }));
+    } catch (err) {
+      console.error("Erro ao buscar a quantidade de desenvolvedores:", err);
     }
   };
 
@@ -27,6 +41,11 @@ const NivelList = () => {
     try {
       await axios.delete(`http://localhost:3000/api/nivel/${id}`);
       setNiveis(niveis.filter((nivel) => nivel.id !== id));
+      setDevsCount((prev) => {
+        const newDevsCount = { ...prev };
+        delete newDevsCount[id];
+        return newDevsCount;
+      });
     } catch (err) {
       console.error("Erro ao excluir o nível:", err);
     }
@@ -73,8 +92,15 @@ const NivelList = () => {
           niveis.map((nivel) => (
             <span key={nivel.id} className="flex flex-col gap-3 px-2 py-0.5">
               <section className="flex justify-between items-center gap-20 px-3">
-                <div className="flex justify-between items-center gap-10 text-xl">
+                <div className="flex justify-between items-center gap-4 text-xl">
                   <h3>ID: {nivel.id}</h3>
+
+                  <p>
+                    Devs:{" "}
+                    <span className="font-semibold">
+                      {devsCount[nivel.id] || 0}
+                    </span>
+                  </p>
 
                   {editId === nivel.id ? (
                     <input
@@ -84,7 +110,7 @@ const NivelList = () => {
                       className="border px-2 py-1"
                     />
                   ) : (
-                    <p>{nivel.nome}</p>
+                    <p>Nome: {nivel.nome}</p>
                   )}
                 </div>
                 <div className="flex gap-4 text-lg">
