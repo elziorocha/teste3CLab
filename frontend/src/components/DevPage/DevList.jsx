@@ -138,7 +138,10 @@ const DevList = () => {
                     Editar
                   </button>
                   <button
-                    onClick={() => setOpenDelete(true)}
+                    onClick={() => {
+                      setSelectedDev(dev);
+                      setOpenDelete(true);
+                    }}
                     className="button-default bg-red-700 hover:bg-red-800"
                   >
                     Excluir

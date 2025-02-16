@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Modal from "../modals/Modal";
+import Modal from "./Modal";
 import { FaTrash } from "react-icons/fa";
 
 const DeleteModal = ({ open, onClose, handleDelete, devId }) => {
